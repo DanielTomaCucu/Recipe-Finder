@@ -1,0 +1,15 @@
+
+  <ion-list>
+    <ion-item *ngFor="let recipe of recipes.recipes">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="recipe.image"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ recipe.title }}</h2>
+        <p>Cooking Time: {{ recipe.cookingMinutes }} minutes</p>
+        <p>Likes: {{ recipe.aggregateLikes }}</p>
+        <!-- Add more properties you wish to display -->
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
