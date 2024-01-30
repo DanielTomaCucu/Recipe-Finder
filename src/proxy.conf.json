@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://api.spoonacular.com",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/api": "" }
+  }
+}

@@ -1,7 +1,7 @@
 // src/environments/environment.prod.ts
 export const environment = {
   production: true,
-  apiKey: 'fd8cb7cd56msh63112d812ceb5a3p191452jsn136850188e6d', // Replace with your actual API key
+  apiKey: '5d4e68da27f74df386494136871aae0a', // Replace with your actual API key
 };
 
 

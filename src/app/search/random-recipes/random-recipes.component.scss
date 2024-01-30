@@ -1,0 +1,66 @@
+.icon-bg {
+  padding: 8px;
+  border: 1px solid #dedede;
+  border-radius: 14px;
+  width: 45px;
+  height: 45px;
+  background: #f7f7f7;
+}
+.container-list-h {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+}
+h4 {
+  font-weight: 600;
+  margin: 0px;
+  padding: 0px;
+}
+p {
+  margin: 0px;
+  font-weight: 300;
+}
+
+.horizontal-scroll {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  white-space: nowrap;
+
+  ion-card {
+    flex: 0 0 auto; // Prevent cards from stretching
+    margin-right: 10px; // Add some space between cards
+    width: 270px;
+
+    ion-img {
+      width: 270px; // Adjust as per your design
+      height: auto;
+    }
+
+    h2 {
+      padding: 0px 10px;
+      text-wrap: wrap;
+      font-size: large;
+    }
+  }
+}
+.recipe-details-icon {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px; // Adds space between the icon sets
+
+  img {
+    width: 24px; // Adjust the size of the icon
+    height: 24px; // Keep the icon square
+    margin-right: 8px; // Space between the icon and text
+  }
+
+  p {
+    margin: 0; // Removes default paragraph margin
+    font-size: 0.9em; // Adjust text size as needed
+    color: #666; // A softer color for the text
+  }
+}
+

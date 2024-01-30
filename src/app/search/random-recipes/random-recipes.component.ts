@@ -15,7 +15,7 @@ export class RandomRecipesComponent implements OnInit {
   }
 
   getRandomRecipes() {
-    const endpoint = 'recipes/random?number=6';
+    const endpoint = 'random?number=6';
     this.apiService.getApiData(endpoint).subscribe(
       (data) => {
         console.log(data);

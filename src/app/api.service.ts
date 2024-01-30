@@ -1,24 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from './environments/environments.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  private apiHost = 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
   private apiKey = environment.apiKey;
+  private apiHost = 'https://api.spoonacular.com/recipes';
 
   constructor(private http: HttpClient) {}
 
   getApiData(endpoint: string, params?: any) {
-    const url = `https://${this.apiHost}/${endpoint}`;
+    const url = `${this.apiHost}/${endpoint}`;
+    const queryParams = { ...params, apiKey: this.apiKey };
 
-    let headers = new HttpHeaders({
-      'X-RapidAPI-Key': this.apiKey,
-      'X-RapidAPI-Host': this.apiHost,
-    });
-
-    return this.http.get(url, { headers, params });
+    return this.http.get(url, { params: queryParams });
   }
 }

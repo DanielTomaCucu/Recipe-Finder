@@ -1,15 +1,27 @@
+<div class="container-list-h">
+  <div class="icon-bg">
+    <img src="../../../assets/icons/fire.png" class="icon-list" />
+  </div>
+  <div>
+    <h4>Daily Recipes</h4>
+    <p>Let‘s try a new interesting recipe today</p>
+  </div>
+</div>
 
-  <ion-list>
-    <ion-item *ngFor="let recipe of recipes.recipes">
-      <ion-thumbnail slot="start">
-        <ion-img [src]="recipe.image"></ion-img>
-      </ion-thumbnail>
-      <ion-label>
-        <h2>{{ recipe.title }}</h2>
-        <p>Cooking Time: {{ recipe.cookingMinutes }} minutes</p>
-        <p>Likes: {{ recipe.aggregateLikes }}</p>
-        <!-- Add more properties you wish to display -->
-      </ion-label>
-    </ion-item>
-  </ion-list>
+<div class="horizontal-scroll">
+  <ion-card *ngFor="let recipe of recipes.recipes">
+    <ion-img [src]="recipe.image"></ion-img>
+    <h2>{{ recipe.title }}</h2>
+ <ion-card-content>
+  <div class="recipe-details-icon">
+    <img src="../../../assets/icons/cooking-pot-svgrepo-com.svg" />
+    <p>{{ recipe.readyInMinutes }} minutes</p>
+  </div>
+  <div class="recipe-details-icon">
+    <img src="../../../assets/icons/bowl-svgrepo-com.svg" />
+    <p>{{ recipe.aggregateLikes }} servings</p>
+  </div>
+</ion-card-content>
 
+  </ion-card>
+</div>
