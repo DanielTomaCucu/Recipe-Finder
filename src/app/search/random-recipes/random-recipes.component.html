@@ -12,16 +12,20 @@
   <ion-card *ngFor="let recipe of recipes.recipes">
     <ion-img [src]="recipe.image"></ion-img>
     <h2>{{ recipe.title }}</h2>
- <ion-card-content>
-  <div class="recipe-details-icon">
-    <img src="../../../assets/icons/cooking-pot-svgrepo-com.svg" />
-    <p>{{ recipe.readyInMinutes }} minutes</p>
-  </div>
-  <div class="recipe-details-icon">
-    <img src="../../../assets/icons/bowl-svgrepo-com.svg" />
-    <p>{{ recipe.aggregateLikes }} servings</p>
-  </div>
-</ion-card-content>
-
+    <ion-card-content>
+      <div>
+        <div class="recipe-details-icon">
+          <img src="../../../assets/icons/cooking-pot-svgrepo-com.svg" />
+          <p>{{ recipe.readyInMinutes }} minutes</p>
+        </div>
+        <div class="recipe-details-icon">
+          <img src="../../../assets/icons/bowl-svgrepo-com.svg" />
+          <p>{{ recipe.aggregateLikes }} servings</p>
+        </div>
+      </div>
+      <div class="redirect-button">
+        <img src="../../../assets/icons/arrow-right-up-358-svgrepo-com.svg" />
+      </div>
+    </ion-card-content>
   </ion-card>
 </div>
