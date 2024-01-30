@@ -5,9 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { SearchPage } from './search.page';
 
 import { SearchPageRoutingModule } from './search-routing.module';
+import { RandomRecipesComponent } from './random-recipes/random-recipes.component';
 
 @NgModule({
   imports: [IonicModule, CommonModule, FormsModule, SearchPageRoutingModule],
-  declarations: [SearchPage],
+  declarations: [SearchPage, RandomRecipesComponent],
 })
 export class SearchPageModule {}
