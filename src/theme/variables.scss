@@ -4,6 +4,10 @@
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
+  --bg-buttons: #f5f6f969;
+  --buttons-border:#ddddddd6;
+
+  
   --ion-color-primary: #3880FF;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
@@ -236,7 +240,7 @@
 }
 
 html {
-  /* 
+  /*
    * For more information on dynamic font scaling, visit the documentation:
    * https://ionicframework.com/docs/layout/dynamic-font-scaling
    */

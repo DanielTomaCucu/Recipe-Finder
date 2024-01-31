@@ -1,10 +1,10 @@
 .icon-bg {
   padding: 8px;
-  border: 1px solid #dedede;
+  border: 1px solid var(--buttons-border);
   border-radius: 14px;
   width: 45px;
   height: 45px;
-  background: #f7f7f7;
+  background: var(--bg-buttons);
 }
 .container-list-h {
   margin-top: 15px;
@@ -79,11 +79,11 @@ ion-card-content{
 }
 
 .redirect-button{
-      border: 1px solid #dedede;
+      border: 1px solid var(--buttons-border);
     width: max-content;
     padding: 5px;
     border-radius: 10px;
-    background: #f5f5f5ba;
+    background: var(--bg-buttons);
 
     img{
       width: 25px;
