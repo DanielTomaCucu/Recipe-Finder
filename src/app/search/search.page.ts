@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { CUISINES } from './cusines';
 import { SelectedCusinseService } from '../shared/selected-cusinse.service';
+import { ApiService } from '../api.service';
+import { SearchService } from './search.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -11,17 +14,19 @@ export class SearchPage {
   presentingElement: any = null;
   cuisines: string[] = CUISINES;
   selectedCuisines: string[] = [];
+  searchQuery: string = '';
 
-  constructor(public selectedCuisineService: SelectedCusinseService) {}
+  constructor(
+    public selectedCuisineService: SelectedCusinseService,
+    private searchService: SearchService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.presentingElement = document.querySelector('.ion-page');
     this.selectedCuisines = this.selectedCuisineService.getSelectedCuisines();
   }
 
-  onModalClose() {
-    this.selectedCuisines = this.selectedCuisineService.getSelectedCuisines();
-  }
   onCuisineChange(cuisine: string, isChecked: boolean) {
     if (isChecked) {
       this.selectedCuisines.push(cuisine);
@@ -30,7 +35,11 @@ export class SearchPage {
         (c) => c !== cuisine
       );
     }
-    console.log(this.selectedCuisines)
     this.selectedCuisineService.setSelectedCuisines(this.selectedCuisines);
+  }
+
+  search() {
+    this.searchService.searchRecipes(this.searchQuery, this.selectedCuisines);
+    this.router.navigateByUrl('search/cuisines');
   }
 }
