@@ -9,28 +9,40 @@ const routes: Routes = [
     children: [
       {
         path: 'planner',
-        loadChildren: () => import('../planner/planner.module').then(m => m.PlanningPageModule)
+        loadChildren: () =>
+          import('../planner/planner.module').then((m) => m.PlanningPageModule),
       },
       {
         path: 'search',
-        loadChildren: () => import('../search/search.module').then(m => m.SearchPageModule)
+        loadChildren: () =>
+          import('../search/search.module').then((m) => m.SearchPageModule),
       },
       {
         path: 'analytics',
-        loadChildren: () => import('../analytics/analytics.module').then(m => m.AnalyticsPageModule)
+        loadChildren: () =>
+          import('../analytics/analytics.module').then(
+            (m) => m.AnalyticsPageModule
+          ),
       },
       {
         path: '',
         redirectTo: '/search',
-        pathMatch: 'full'
-      }
-    ]
+        pathMatch: 'full',
+      },
+    ],
+  },
+  {
+    path: 'search/cuisines',
+    loadChildren: () =>
+      import('../search/searched-cuisines/searched-cuisines.module').then(
+        (m) => m.SearchedCuisinesModule
+      ),
   },
   {
     path: '',
     redirectTo: '/search',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
