@@ -3,29 +3,40 @@
     <ion-buttons slot="start">
       <ion-back-button default-href="#"></ion-back-button>
     </ion-buttons>
-    <ion-title>Back Button</ion-title>
+    <ion-title>Recipes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="recipes">
-  <div class="recipes-container">
-    <ion-card *ngFor="let recipe of recipes.results">
-      <img [src]="recipe.image" />
-
-      <h6>{{recipe.title }}</h6>
-
-      <ion-card-content>
-        <div>
-          <div class="recipe-details-icon">
-            <img src="../../../assets/icons/cooking-pot-svgrepo-com.svg" />
-            <p>{{ recipe.readyInMinutes }} minutes</p>
+<ion-content>
+  <div *ngIf="recipes.length > 0; else noRecipes">
+    <div class="recipes-container">
+      <ion-card *ngFor="let recipe of recipes">
+        <img [src]="recipe.image" />
+        <h6>{{ recipe.title }}</h6>
+        <ion-card-content>
+          <div>
+            <div class="recipe-details-icon">
+              <img src="../../../assets/icons/cooking-pot-svgrepo-com.svg" />
+              <p>{{ recipe.readyInMinutes }} minutes</p>
+            </div>
+            <div class="recipe-details-icon">
+              <img src="../../../assets/icons/bowl-svgrepo-com.svg" />
+              <p>{{ recipe.servings }} servings</p>
+            </div>
           </div>
-          <div class="recipe-details-icon">
-            <img src="../../../assets/icons/bowl-svgrepo-com.svg" />
-            <p>{{ recipe.servings }} servings</p>
-          </div>
-        </div>
-      </ion-card-content>
-    </ion-card>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <div class="infinite-scroll-content">
+        <img class="loader-svg" src="../../../assets/icons/loader.svg" />
+      </div>
+    </ion-infinite-scroll>
   </div>
+
+  <ng-template #noRecipes>
+    <div class="no-recipe-container">
+      <img class="no-recipe" src="../../../assets/icons/no-recipe.png" />
+    </div>
+  </ng-template>
 </ion-content>

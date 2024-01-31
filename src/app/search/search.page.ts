@@ -40,6 +40,8 @@ export class SearchPage {
 
   search() {
     this.searchService.searchRecipes(this.searchQuery, this.selectedCuisines);
+    this.searchService.searchQuery = this.searchQuery;
+    this.searchService.selectedCuisines = this.selectedCuisines;
     this.router.navigateByUrl('search/cuisines');
   }
 }
