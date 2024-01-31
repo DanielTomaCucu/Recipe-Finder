@@ -1,21 +1,52 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Search new Recipes </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<div class="ion-page">
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large"> Search new Recipes</ion-title>
+      <ion-title> Search new Recipes </ion-title>
     </ion-toolbar>
   </ion-header>
-  <div class="container-main">
-    <ion-item>
-      <ion-label position="floating">Search recipes</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
 
-    <app-random-recipes></app-random-recipes>
-  </div>
-</ion-content>
+  <ion-content [fullscreen]="true" #page>
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large"> Search new Recipes</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <div class="container-main">
+      <div class="complex-search">
+        <ion-input
+          [clearInput]="true"
+          placeholder="Enter text to see clear button"
+        ></ion-input>
+        <div class="filter-button" id="open-modal" expand="block">
+          <img src="./../../assets/icons/filter-list-svgrepo-com.svg" />
+        </div>
+      </div>
+
+      <app-random-recipes></app-random-recipes>
+    </div>
+  </ion-content>
+<ion-modal #modal trigger="open-modal" [presentingElement]="presentingElement">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Choose Cuisine</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="modal.dismiss()">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item *ngFor="let cuisine of cuisines">
+          <ion-checkbox labelPlacement="end" justify="start"
+            [checked]="selectedCuisineService.isCuisineSelected(cuisine)"
+            (ionChange)="onCuisineChange(cuisine, $event.detail.checked)"> {{ cuisine }}
+          </ion-checkbox>
+
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+</div>

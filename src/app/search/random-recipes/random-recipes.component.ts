@@ -11,7 +11,7 @@ export class RandomRecipesComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.getRandomRecipes()
+  //this.getRandomRecipes()
   }
 
   getRandomRecipes() {
