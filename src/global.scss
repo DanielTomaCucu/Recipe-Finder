@@ -43,3 +43,14 @@ ion-modal::part(container) {
   width: 100%;
   border-radius: 0;
 }
+
+.loader-svg {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.infinite-scroll-content {
+  text-align: center;
+  padding: 20px 0;
+}

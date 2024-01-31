@@ -7,15 +7,14 @@
 ion-card {
   margin: 0px;
 }
-ion-card-content{
+ion-card-content {
   padding: 15px;
 }
-
 
 .recipe-details-icon {
   display: flex;
   align-items: center;
-  margin-bottom: 8px; // Adds space between the icon sets
+  margin-bottom: 8px; 
 
   img {
     width: 24px; // Adjust the size of the icon
@@ -39,11 +38,14 @@ h6 {
   white-space: normal;
   max-height: 2.3em;
   min-height: 2.3em;
-
   line-height: 1.2;
   padding: 0px 16px;
   margin: 0px 0px;
-
   color: #212121;
   font-weight: 400;
+}
+.no-recipe-container {
+  display: flex;
+  margin-top: 10%;
+  justify-content: center;
 }
