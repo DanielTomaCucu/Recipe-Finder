@@ -14,12 +14,14 @@
     <div class="container-main">
       <div class="complex-search">
         <div class="input-search">
-        <ion-input
-          [(ngModel)]="searchQuery"
-
-          placeholder="Enter text"
-        ></ion-input>
-        <div *ngIf="searchQuery" (click)="search()"><ion-icon name="search-outline"></ion-icon></div>
+          <ion-input
+            [(ngModel)]="searchQuery"
+            (keyup.enter)="search()"
+            placeholder="Enter text"
+          ></ion-input>
+          <div *ngIf="searchQuery" (click)="search()">
+            <ion-icon name="search-outline"></ion-icon>
+          </div>
         </div>
         <div class="filter-button" id="open-modal" expand="block">
           <img src="./../../assets/icons/filter-list-svgrepo-com.svg" />

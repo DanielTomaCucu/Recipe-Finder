@@ -1,3 +1,31 @@
-<p>
-  searched-cuisines works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Back Button</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="recipes">
+  <div class="recipes-container">
+    <ion-card *ngFor="let recipe of recipes.results">
+      <img [src]="recipe.image" />
+
+      <h6>{{recipe.title }}</h6>
+
+      <ion-card-content>
+        <div>
+          <div class="recipe-details-icon">
+            <img src="../../../assets/icons/cooking-pot-svgrepo-com.svg" />
+            <p>{{ recipe.readyInMinutes }} minutes</p>
+          </div>
+          <div class="recipe-details-icon">
+            <img src="../../../assets/icons/bowl-svgrepo-com.svg" />
+            <p>{{ recipe.servings }} servings</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
