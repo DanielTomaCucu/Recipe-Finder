@@ -7,7 +7,10 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div *ngIf="dummyRecipeInfo as recipeInformation" class="container-main">
+  <div
+    *ngIf="recipeInformation$ | async as recipeInformation"
+    class="container-main"
+  >
     <div class="recipe-info-title">
       <img class="img-recipe" [src]="recipeInformation.image" />
       <p class="recipe-title">{{ recipeInformation.title }}</p>
@@ -38,26 +41,26 @@
         {{ isExpanded ? "Show Less" : "Show More" }}
       </button>
     </div>
+
     <div class="ingredients-container">
       <p class="title-summary">Ingredients</p>
-      <div
-        *ngFor="let ingredient of recipeInformation.extendedIngredients"
-        class="ingredient"
-      >
-        <div class="img-container">
-          <img
-            [src]="
-              'https://spoonacular.com/cdn/ingredients_100x100/' +
-              ingredient.image
-            "
-            alt="{{ ingredient.name }}"
-          />
-        </div>
-        <div>
-          <p>{{ ingredient.nameClean | capitalizeFirst }}</p>
-          <p>
-            {{ ingredient.amount }} {{ ingredient.measures.metric.unitShort }}
-          </p>
+      <div *ngFor="let ingredient of recipeInformation.extendedIngredients">
+        <div *ngIf="ingredient && ingredient.image" class="ingredient">
+          <div class="img-container">
+            <img
+              [src]="
+                'https://spoonacular.com/cdn/ingredients_100x100/' +
+                ingredient.image
+              "
+              alt="{{ ingredient.name }}"
+            />
+          </div>
+          <div>
+            <p>{{ ingredient.nameClean | capitalizeFirst }}</p>
+            <p>
+              {{ ingredient.amount }} {{ ingredient.measures.metric.unitShort }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -80,32 +83,36 @@
           >
             <p class="step-number">{{ step.number }}</p>
             <p>{{ step.step }}</p>
-            <div class="ing-step">
-              <div
-                class="img-container"
-                *ngFor="let ingredient of step.ingredients"
-              >
-                <img
-                  [src]="
-                    'https://spoonacular.com/cdn/ingredients_100x100/' +
-                    ingredient.image
-                  "
-                  alt="{{ ingredient.name }}"
-                />
+            <div class="ing-step" *ngIf="step.ingredients">
+              <div *ngFor="let ingredient of step.ingredients">
+                <div
+                  *ngIf="ingredient && ingredient.image"
+                  class="ingredient img-container"
+                >
+                  <img
+                    (click)="presentToast('top', ingredient.name)"
+                    [src]="
+                      'https://spoonacular.com/cdn/ingredients_100x100/' +
+                      ingredient.image
+                    "
+                    alt="{{ ingredient.name }}"
+                  />
+                </div>
               </div>
             </div>
-            <div class="ing-step">
-              <div
-                class="img-container"
-                *ngFor="let ingredient of step.equipment"
-              >
-                <img
-                  [src]="
-                    'https://spoonacular.com/cdn/equipment_100x100/' +
-                    ingredient.image
-                  "
-                  alt="{{ ingredient.name }}"
-                />
+
+            <div class="ing-step" *ngIf="step.equipment.length > 0">
+              <div *ngFor="let equipment of step.equipment">
+                <div class="img-container" *ngIf="equipment && equipment.image">
+                  <img
+                    (click)="presentToast('top', equipment.name)"
+                    [src]="
+                      'https://spoonacular.com/cdn/equipment_100x100/' +
+                      equipment.image
+                    "
+                    alt="{{ equipment.name }}"
+                  />
+                </div>
               </div>
             </div>
           </div>
