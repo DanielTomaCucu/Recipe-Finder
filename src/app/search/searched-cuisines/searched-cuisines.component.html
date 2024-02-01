@@ -10,7 +10,10 @@
 <ion-content>
   <div *ngIf="recipes.length > 0; else noRecipes">
     <div class="recipes-container">
-      <ion-card *ngFor="let recipe of recipes">
+      <ion-card
+        *ngFor="let recipe of recipes"
+        (click)="redirectToRecipe(recipe.id)"
+      >
         <img [src]="recipe.image" />
         <h6>{{ recipe.title }}</h6>
         <ion-card-content>
@@ -28,9 +31,17 @@
       </ion-card>
     </div>
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-      <div class="infinite-scroll-content">
+      <div
+        class="infinite-scroll-content"
+        *ngIf="!allDataLoaded; else allDataLoaded"
+      >
         <img class="loader-svg" src="../../../assets/icons/loader.svg" />
       </div>
+      <ng-template #allDataLoaded>
+        <div class="noMoreRecipesContainer">
+          <p>No More Recipes</p>
+        </div>
+      </ng-template>
     </ion-infinite-scroll>
   </div>
 
