@@ -7,12 +7,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div
-    *ngIf="recipeInformation$ | async as recipeInformation"
-    class="container-main"
-  >
-    <img class="img-recipe" [src]="recipeInformation.image" />
+  <div *ngIf="dummyRecipeInfo as recipeInformation" class="container-main">
     <div class="recipe-info-title">
+      <img class="img-recipe" [src]="recipeInformation.image" />
       <p class="recipe-title">{{ recipeInformation.title }}</p>
       <div class="summary-recipe">
         <div class="recipe-details-icon">
@@ -34,12 +31,90 @@
         [ngClass]="{ expanded: isExpanded, collapsed: !isExpanded }"
         class="text-container"
       >
-      <p class="title-summary">Summary</p>
-      <p [innerHtml]="recipeInformation.summary | safeHtml"> </p>
+        <p class="title-summary">Summary</p>
+        <p [innerHtml]="recipeInformation.summary | safeHtml"></p>
       </div>
       <button (click)="isExpanded = !isExpanded">
         {{ isExpanded ? "Show Less" : "Show More" }}
       </button>
+    </div>
+    <div class="ingredients-container">
+      <p class="title-summary">Ingredients</p>
+      <div
+        *ngFor="let ingredient of recipeInformation.extendedIngredients"
+        class="ingredient"
+      >
+        <div class="img-container">
+          <img
+            [src]="
+              'https://spoonacular.com/cdn/ingredients_100x100/' +
+              ingredient.image
+            "
+            alt="{{ ingredient.name }}"
+          />
+        </div>
+        <div>
+          <p>{{ ingredient.nameClean | capitalizeFirst }}</p>
+          <p>
+            {{ ingredient.amount }} {{ ingredient.measures.metric.unitShort }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="steps-container">
+      <ion-segment [(ngModel)]="segmentValue">
+        <ion-segment-button value="steps">
+          Detailed Instructions
+        </ion-segment-button>
+        <ion-segment-button value="instructions">
+          Instructions
+        </ion-segment-button>
+      </ion-segment>
+
+      <div [ngSwitch]="segmentValue">
+        <div *ngSwitchCase="'steps'" class="steps">
+          <div
+            class="step"
+            *ngFor="let step of recipeInformation.analyzedInstructions[0].steps"
+          >
+            <p class="step-number">{{ step.number }}</p>
+            <p>{{ step.step }}</p>
+            <div class="ing-step">
+              <div
+                class="img-container"
+                *ngFor="let ingredient of step.ingredients"
+              >
+                <img
+                  [src]="
+                    'https://spoonacular.com/cdn/ingredients_100x100/' +
+                    ingredient.image
+                  "
+                  alt="{{ ingredient.name }}"
+                />
+              </div>
+            </div>
+            <div class="ing-step">
+              <div
+                class="img-container"
+                *ngFor="let ingredient of step.equipment"
+              >
+                <img
+                  [src]="
+                    'https://spoonacular.com/cdn/equipment_100x100/' +
+                    ingredient.image
+                  "
+                  alt="{{ ingredient.name }}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="'instructions'">
+          <p [innerHtml]="recipeInformation.instructions | safeHtml"></p>
+        </div>
+      </div>
     </div>
   </div>
 </ion-content>
