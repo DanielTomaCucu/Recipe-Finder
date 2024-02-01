@@ -20,20 +20,21 @@ export class RecipeAllInformationComponent implements OnInit {
   ) {}
   isExpanded: boolean = false;
   recipeInformation$: Observable<any> | undefined;
+  ingrediendHasImage: boolean = false;
   ngOnInit() {
-      const recipeId = this.route.snapshot.paramMap.get('recipeId')!;
+    const recipeId = this.route.snapshot.paramMap.get('recipeId')!;
     this.recipeInformation$ =
       this.recipeAllInformationService.searchRecipes(recipeId);
 
-   // console.log(dummyRecipeInfo);
-    // this.recipeInformation$.subscribe(data => console.log(data));
+    // console.log(dummyRecipeInfo);
+    this.recipeInformation$.subscribe((data) => console.log(data));
   }
-  async presentToast(position: 'top',message:string) {
+  async presentToast(position: 'top', message: string) {
     const toast = await this.toastController.create({
       message: message,
       duration: 1500,
       position: position,
-      cssClass:"toastIng"
+      cssClass: 'toastIng',
     });
 
     await toast.present();

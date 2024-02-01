@@ -44,7 +44,7 @@
 }
 
 .text-container {
-  max-height: 150px; /* Adjust based on your needs */
+  max-height: 150px;
   overflow: hidden;
   transition: max-height 0.5s ease-out;
 }
@@ -107,12 +107,6 @@
     font-weight: 400;
   }
 }
-.img-container img {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* This ensures the image keeps its aspect ratio */
-}
 .img-container {
   min-width: 55px;
   max-width: 55px;
@@ -123,10 +117,16 @@
   border-radius: 10px;
   display: flex;
   flex-wrap: nowrap;
-  align-items: center;
   justify-content: center;
   overflow: hidden;
 }
+.img-container img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; 
+}
+
 p {
   margin: 5px 0px;
 }
@@ -142,7 +142,7 @@ p {
   .step {
     position: relative;
     border: 1px solid var(--card-border);
-    border-radius: 6px;
+    border-radius: 0px 10px 10px 10px;
     background: #fff;
     padding: 10px;
     margin-left: 10px;
@@ -168,14 +168,20 @@ p {
     border: 1px solid var(--card-border);
     text-align: center;
     z-index: -2;
+    background: #fcfcfc;
   }
 }
-.ing-step {
-  display: flex;
+
+.class-without-image {
+  border-top: none;
+}
+.class-with-image {
+   display: flex;
   gap: 4px;
   flex-wrap: wrap;
-  border-top: 1px solid var(--card-border);
+
   padding-top: 10px;
+  border-top: 1px solid var(--card-border);
 }
 ion-toast.toastIng {
   --background: #f4f4fa;
