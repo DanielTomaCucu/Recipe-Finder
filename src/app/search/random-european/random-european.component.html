@@ -1,29 +1,27 @@
 <div class="container-list-h">
   <div class="icon-bg">
-    <img src="../../../assets/icons/fire.png" class="icon-list" />
+    <img src="../../../assets/icons/meat.svg" class="icon-list" />
   </div>
   <div>
-    <h4>Daily Recipes</h4>
-    <p>Let‘s try a new interesting recipe today</p>
+    <h4>European Eats</h4>
+    <p>Discover a taste of Europe with today's featured recipe</p>
   </div>
 </div>
 
-<div *ngIf="recipes; else loading" class="horizontal-scroll">
+<div class="horizontal-scroll" *ngIf="randomEuropean; else loading">
   <ion-card
-    *ngFor="let recipe of recipes.recipes"
+    *ngFor="let recipe of randomEuropean.recipes"
     (click)="redirectToRecipe(recipe.id)"
   >
     <ion-img [src]="recipe.image" *ngIf="recipe.image; else noImage"></ion-img>
     <ng-template #noImage>
       <ion-img src="../../../assets/icons/no-image.jpeg" class="noImg"></ion-img>
     </ng-template>
-
     <h2>{{ recipe.title }}</h2>
     <ion-card-content>
       <div>
         <div class="recipe-details-icon">
           <img src="../../../assets/icons/cooking-pot-svgrepo-com.svg" />
-
           <p>{{ recipe.readyInMinutes }} minutes</p>
         </div>
         <div class="recipe-details-icon">

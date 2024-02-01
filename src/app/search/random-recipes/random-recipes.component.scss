@@ -7,7 +7,7 @@
   background: var(--bg-buttons);
 }
 .container-list-h {
-  margin-top: 15px;
+  margin-top: 15%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -28,6 +28,7 @@ p {
   flex-direction: row;
   overflow-x: auto;
   white-space: nowrap;
+  margin-bottom: 40px;
 
   ion-card {
     position: relative;
@@ -39,26 +40,25 @@ p {
       width: 270px; // Adjust as per your design
       height: auto;
     }
-h2 {
-  display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    max-height: 2.5em;
-    min-height: 2.5em;
-    font-size: large;
-    line-height: 1.2;
-    padding: 0px 16px;
-}
-
+    h2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      max-height: 2.5em;
+      min-height: 2.5em;
+      font-size: large;
+      line-height: 1.2;
+      padding: 0px 16px;
+    }
   }
 }
-ion-card-content{
+ion-card-content {
   display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 .recipe-details-icon {
   display: flex;
@@ -66,8 +66,8 @@ ion-card-content{
   margin-bottom: 8px; // Adds space between the icon sets
 
   img {
-    width: 24px; // Adjust the size of the icon
-    height: 24px; // Keep the icon square
+    width: 18px; // Adjust the size of the icon
+    height: 18px; // Keep the icon square
     margin-right: 8px; // Space between the icon and text
   }
 
@@ -78,15 +78,28 @@ ion-card-content{
   }
 }
 
-.redirect-button{
-      border: 1px solid var(--buttons-border);
-    width: max-content;
-    padding: 5px;
-    border-radius: 10px;
-    background: var(--bg-buttons);
+.redirect-button {
+  border: 1px solid var(--buttons-border);
+  width: max-content;
+  padding: 5px;
+  border-radius: 10px;
+  background: var(--bg-buttons);
 
-    img{
-      width: 25px;
-      height: 15px;
-    }
+  img {
+    width: 25px;
+    height: 15px;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.noImg {
+  height: 179px !important;
+  object-fit: cover;
 }
