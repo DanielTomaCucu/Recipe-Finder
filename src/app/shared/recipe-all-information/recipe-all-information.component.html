@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Recipes</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div
+    *ngIf="recipeInformation$ | async as recipeInformation"
+    class="container-main"
+  >
+    <img class="img-recipe" [src]="recipeInformation.image" />
+    <div class="recipe-info-title">
+      <p class="recipe-title">{{ recipeInformation.title }}</p>
+      <div class="summary-recipe">
+        <div class="recipe-details-icon">
+          <img src="../../../assets/icons/cooking-pot-svgrepo-com.svg" />
+          <p>{{ recipeInformation.readyInMinutes }} minutes</p>
+        </div>
+        <div class="recipe-details-icon">
+          <img src="../../../assets/icons/bowl-svgrepo-com.svg" />
+          <p>{{ recipeInformation.servings }} servings</p>
+        </div>
+        <div class="recipe-details-icon">
+          <img src="../../../assets/icons/money_icon.svg" />
+          <p>{{ recipeInformation.pricePerServing }}$</p>
+        </div>
+      </div>
+    </div>
+    <div class="summary-container">
+      <div
+        [ngClass]="{ expanded: isExpanded, collapsed: !isExpanded }"
+        class="text-container"
+      >
+      <p class="title-summary">Summary</p>
+      <p [innerHtml]="recipeInformation.summary | safeHtml"> </p>
+      </div>
+      <button (click)="isExpanded = !isExpanded">
+        {{ isExpanded ? "Show Less" : "Show More" }}
+      </button>
+    </div>
+  </div>
+</ion-content>

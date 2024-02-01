@@ -9,6 +9,7 @@ import { ApiResponse } from '../interfaces/apiResponse';
 export class SearchService {
   constructor(private apiService: ApiService) {}
   offset = 0;
+   allDataLoaded = false;
 
   public searchQuery: string = '';
   public selectedCuisines: string[] = [];
@@ -20,7 +21,7 @@ export class SearchService {
   public loading$ = this.loadingSubject.asObservable();
 
   searchRecipes(searchQuery: string, selectedCuisines: string[]) {
-    if (this.loadingSubject.value) return;
+    if (this.loadingSubject.value || this.allDataLoaded) return;
 
     this.loadingSubject.next(true);
     const params = {
@@ -36,8 +37,8 @@ export class SearchService {
           data.offset + data.number <= this.offset ||
           data.totalResults <= this.offset ||
           !data
-        ) {
-          console.log(data.totalResults, this.offset);
+        ) { this.allDataLoaded = true;
+          console.log(data.totalResults, this.offset, this.allDataLoaded);
           this.loadingSubject.next(false);
           return;
         }

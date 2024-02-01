@@ -14,12 +14,12 @@ ion-card-content {
 .recipe-details-icon {
   display: flex;
   align-items: center;
-  margin-bottom: 8px; 
+  margin-bottom: 5px;
 
   img {
-    width: 24px; // Adjust the size of the icon
-    height: 24px; // Keep the icon square
-    margin-right: 8px; // Space between the icon and text
+    width: 19px; // Adjust the size of the icon
+    height: 19px; // Keep the icon square
+    margin-right: 5px; // Space between the icon and text
   }
 
   p {
@@ -37,9 +37,9 @@ h6 {
   text-overflow: ellipsis;
   white-space: normal;
   max-height: 2.3em;
-  min-height: 2.3em;
+  min-height: 2.8em;
   line-height: 1.2;
-  padding: 0px 16px;
+  padding: 7px 16px 0px;
   margin: 0px 0px;
   color: #212121;
   font-weight: 400;
@@ -48,4 +48,12 @@ h6 {
   display: flex;
   margin-top: 10%;
   justify-content: center;
+}
+.noMoreRecipesContainer {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  p {
+    font-weight: 600;
+  }
 }

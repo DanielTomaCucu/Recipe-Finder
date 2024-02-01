@@ -37,7 +37,16 @@ const routes: Routes = [
       import('../search/searched-cuisines/searched-cuisines.module').then(
         (m) => m.SearchedCuisinesModule
       ),
+    data: { animation: 'SearchedCuisines' },
   },
+  {
+    path: 'recipe-details/:recipeId',
+    loadChildren: () =>
+      import(
+        '../shared/recipe-all-information/recipe-all-information.module'
+      ).then((m) => m.RecipeAllInformationModule),
+  },
+
   {
     path: '',
     redirectTo: '/search',
