@@ -7,135 +7,157 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div
-    *ngIf="recipeInformation$ | async as recipeInformation"
-    class="container-main"
-  >
-    <div class="recipe-info-title">
-      <img class="img-recipe" [src]="recipeInformation.image" />
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
 
-      <p class="recipe-title">{{ recipeInformation.title }}</p>
-      <div class="summary-recipe">
-        <div class="recipe-details-icon">
-          <img src="../../../assets/icons/cooking-pot-svgrepo-com.svg" />
-          <p>{{ recipeInformation.readyInMinutes }} minutes</p>
-        </div>
-        <div class="recipe-details-icon">
-          <img src="../../../assets/icons/bowl-svgrepo-com.svg" />
-          <p>{{ recipeInformation.servings }} servings</p>
-        </div>
-        <div class="recipe-details-icon">
-          <img src="../../../assets/icons/money_icon.svg" />
-          <p>{{ recipeInformation.pricePerServing }}$</p>
+  <ng-container *ngIf="loading; else loadedContent">
+    <app-recipe-all-information-sk></app-recipe-all-information-sk>
+  </ng-container>
+
+  <ng-template #loadedContent>
+    <div
+      *ngIf="recipeInformation$ | async as recipeInformation"
+      class="container-main"
+    >
+      <div class="recipe-info-title">
+        <img class="img-recipe" [src]="recipeInformation.image" />
+
+        <p class="recipe-title">{{ recipeInformation.title }}</p>
+        <div class="summary-recipe">
+          <div class="recipe-details-icon">
+            <img src="../../../assets/icons/cooking-pot-svgrepo-com.svg" />
+            <p>{{ recipeInformation.readyInMinutes }} minutes</p>
+          </div>
+          <div class="recipe-details-icon">
+            <img src="../../../assets/icons/bowl-svgrepo-com.svg" />
+            <p>{{ recipeInformation.servings }} servings</p>
+          </div>
+          <div class="recipe-details-icon">
+            <img src="../../../assets/icons/money_icon.svg" />
+            <p>{{ recipeInformation.pricePerServing }}$</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="summary-container">
-      <div
-        [ngClass]="{ expanded: isExpanded, collapsed: !isExpanded }"
-        class="text-container"
-      >
-        <p class="title-summary">Summary</p>
-        <p [innerHtml]="recipeInformation.summary | safeHtml"></p>
+      <div class="summary-container">
+        <div
+          [ngClass]="{ expanded: isExpanded, collapsed: !isExpanded }"
+          class="text-container"
+        >
+          <p class="title-summary">Summary</p>
+          <p [innerHtml]="recipeInformation.summary | safeHtml"></p>
+        </div>
+        <button (click)="isExpanded = !isExpanded">
+          {{ isExpanded ? "Show Less" : "Show More" }}
+        </button>
       </div>
-      <button (click)="isExpanded = !isExpanded">
-        {{ isExpanded ? "Show Less" : "Show More" }}
-      </button>
-    </div>
 
-    <div class="ingredients-container">
-      <p class="title-summary">Ingredients</p>
-      <div *ngFor="let ingredient of recipeInformation.extendedIngredients">
-        <div *ngIf="ingredient || ingredient.image" class="ingredient">
-          <div class="img-container">
-            <img 
-              [src]="
-                'https://spoonacular.com/cdn/ingredients_100x100/' +
-                ingredient.image
+      <div class="ingredients-container">
+        <p class="title-summary">Ingredients</p>
+        <div *ngFor="let ingredient of recipeInformation.extendedIngredients">
+          <div *ngIf="ingredient || ingredient.image" class="ingredient">
+            <div class="img-container">
+              <img
+                [src]="
+                  'https://spoonacular.com/cdn/ingredients_100x100/' +
+                  ingredient.image
+                "
+                alt="{{ ingredient.name }}"
+              />
+            </div>
+            <div>
+              <p>{{ ingredient.nameClean | capitalizeFirst }}</p>
+              <p>
+                {{ ingredient.amount }}
+                {{ ingredient.measures.metric.unitShort }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps-container">
+        <ion-segment [(ngModel)]="segmentValue">
+          <ion-segment-button value="steps">
+            Detailed Instructions
+          </ion-segment-button>
+          <ion-segment-button value="instructions">
+            Instructions
+          </ion-segment-button>
+        </ion-segment>
+
+        <div [ngSwitch]="segmentValue">
+          <div *ngSwitchCase="'steps'" class="steps">
+            <div
+              class="step"
+              *ngFor="
+                let step of recipeInformation?.analyzedInstructions[0]?.steps
               "
-              alt="{{ ingredient.name }}"
-            />
-          </div>
-          <div>
-            <p>{{ ingredient.nameClean | capitalizeFirst }}</p>
-            <p>
-              {{ ingredient.amount }} {{ ingredient.measures.metric.unitShort }}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="steps-container">
-      <ion-segment [(ngModel)]="segmentValue">
-        <ion-segment-button value="steps">
-          Detailed Instructions
-        </ion-segment-button>
-        <ion-segment-button value="instructions">
-          Instructions
-        </ion-segment-button>
-      </ion-segment>
-
-      <div [ngSwitch]="segmentValue">
-        <div *ngSwitchCase="'steps'" class="steps">
-          <div
-            class="step"
-            *ngFor="let step of recipeInformation.analyzedInstructions[0].steps"
-          >
-            <p class="step-number">{{ step.number }}</p>
-            <p>{{ step.step }}</p>
-
-            <div
-              *ngIf="step.ingredients.length > 0"
-              [ngClass]="{
-                'class-with-image': step.ingredients[0]?.image,
-                'class-without-image': !step.ingredients[0]?.image
-              }"
             >
-              <div *ngFor="let ingredient of step.ingredients">
-                <div
-                  *ngIf="ingredient && ingredient.image"
-                  class="ingredient img-container"
-                >
-                  <img
-                    (click)="presentToast('top', ingredient.name)"
-                    [src]="
-                      'https://spoonacular.com/cdn/ingredients_100x100/' +
-                      ingredient.image
-                    "
-                    alt="{{ ingredient.name }}"
-                  />
+              <p class="step-number">{{ step?.number }}</p>
+              <p>{{ step?.step }}</p>
+
+              <div
+                *ngIf="step?.ingredients?.length > 0"
+                [ngClass]="{
+                  'class-with-image': step.ingredients[0]?.image,
+                  'class-without-image': !step.ingredients[0]?.image
+                }"
+              >
+                <div *ngFor="let ingredient of step.ingredients">
+                  <div
+                    *ngIf="ingredient && ingredient.image"
+                    class="ingredient img-container"
+                  >
+                    <img
+                      (click)="presentToast('top', ingredient.name)"
+                      [src]="
+                        'https://spoonacular.com/cdn/ingredients_100x100/' +
+                        ingredient.image
+                      "
+                      alt="{{ ingredient.name }}"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div
-              *ngIf="step.equipment.length > 0"
-              [ngClass]="{
-                'class-with-image': step.equipment[0]?.image,
-                'class-without-image': !step.equipment[0]?.image
-              }"
-            >
-              <div *ngFor="let equipment of step.equipment">
-                <div class="img-container" *ngIf="equipment && equipment.image">
-                  <img
-                    (click)="presentToast('top', equipment.name)"
-                    [src]="
-                      'https://spoonacular.com/cdn/equipment_100x100/' +
-                      equipment.image
-                    "
-                    alt="{{ equipment.name }}"
-                  />
+              <div
+                *ngIf="step?.equipment.length > 0"
+                [ngClass]="{
+                  'class-with-image': step.equipment[0]?.image,
+                  'class-without-image': !step.equipment[0]?.image
+                }"
+              >
+                <div *ngFor="let equipment of step.equipment">
+                  <div
+                    class="img-container"
+                    *ngIf="equipment && equipment.image"
+                  >
+                    <img
+                      (click)="presentToast('top', equipment.name)"
+                      [src]="
+                        'https://spoonacular.com/cdn/equipment_100x100/' +
+                        equipment.image
+                      "
+                      alt="{{ equipment.name }}"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div *ngSwitchCase="'instructions'">
-          <p [innerHtml]="recipeInformation.instructions | safeHtml"></p>
+          <div *ngSwitchCase="'instructions'">
+            <p [innerHtml]="recipeInformation.instructions | safeHtml"></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </ng-template>
 </ion-content>

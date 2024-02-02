@@ -4,6 +4,7 @@ import { SelectedCusinseService } from '../shared/selected-cusinse.service';
 import { ApiService } from '../api.service';
 import { SearchService } from './search.service';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -15,6 +16,7 @@ export class SearchPage {
   cuisines: string[] = CUISINES;
   selectedCuisines: string[] = [];
   searchQuery: string = '';
+  static refreshDataSubject: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     public selectedCuisineService: SelectedCusinseService,
@@ -43,5 +45,11 @@ export class SearchPage {
     this.searchService.searchQuery = this.searchQuery;
     this.searchService.selectedCuisines = this.selectedCuisines;
     this.router.navigateByUrl('search/cuisines');
+  }
+  handleRefresh(event: { target: { complete: () => void } }) {
+    setTimeout(() => {
+      SearchPage.refreshDataSubject.next(true);
+      event.target.complete();
+    }, 2000);
   }
 }
