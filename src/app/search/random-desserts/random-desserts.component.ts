@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/api.service';
+import { SearchPage } from '../search.page';
 
 @Component({
   selector: 'app-random-desserts',
@@ -10,20 +12,38 @@ import { ApiService } from 'src/app/api.service';
     '../random-recipes/random-recipes.component.scss',
   ],
 })
-export class RandomDessertsComponent implements OnInit {
-  constructor(private apiService: ApiService, private router: Router) {}
+export class RandomDessertsComponent implements OnInit, OnDestroy {
   randomDeserts: any = '';
-  ngOnInit() {
-    const apiUrl = 'random';
+  subscription: Subscription = new Subscription();
+  constructor(private apiService: ApiService, private router: Router) {
+    this.subscription.add(
+      SearchPage.refreshDataSubject.subscribe({
+        next: () => {
+          this.getDesserts();
+        },
+      })
+    );
+  }
 
-     this.apiService
-      .getApiData(apiUrl, { number: 10, tags: 'dessert' })
-      .subscribe((data) => {
-        console.log(data), (this.randomDeserts = data);
-      }); 
+  ngOnInit() {
+    this.getDesserts();
+  }
+  
+  getDesserts() {
+    const apiUrl = 'random';
+    this.subscription.add(
+      this.apiService
+        .getApiData(apiUrl, { number: 10, tags: 'dessert' })
+        .subscribe((data) => {
+          console.log(data), (this.randomDeserts = data);
+        })
+    );
   }
 
   redirectToRecipe(id: string) {
     this.router.navigateByUrl('recipe-details/' + id);
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
