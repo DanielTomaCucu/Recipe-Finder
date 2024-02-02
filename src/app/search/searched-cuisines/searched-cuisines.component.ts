@@ -18,24 +18,19 @@ export class SearchedCuisinesComponent implements OnInit, OnDestroy {
   yourThresholdValue = 100;
 
   ngOnInit() {
-
     this.getAllRecipes();
   }
 
   getAllRecipes() {
- this.subs.add(
-   this.searchService.loading$.subscribe((loadingState) => {
-     console.log(loadingState, this.allDataLoaded)
-     this.loading = loadingState;
-   })
+    this.subs.add(
+      this.searchService.loading$.subscribe((loadingState) => {
+        this.loading = loadingState;
+      })
+    );
 
- );
-     console.log(this.recipes, this.loading);
-     console.log(this.loading)
     this.subs.add(
       this.searchService.recipes$.subscribe((data) => {
         this.recipes = data;
-        console.log(this.recipes, this.loading);
       })
     );
   }

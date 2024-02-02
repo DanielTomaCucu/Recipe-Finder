@@ -29,7 +29,7 @@ export class RandomEuropeanComponent implements OnInit, OnDestroy {
    // this.getEuropenFood();
   }
   getEuropenFood() {
-    const apiUrl = 'random';
+    const apiUrl = 'recipes/random/';
     this.subscription.add(
       this.apiService
         .getApiData(apiUrl, { number: 10, tags: 'european' })

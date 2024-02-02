@@ -6,6 +6,7 @@ import { SkeletonCardsComponent } from './skeleton-loaders/skeleton-cards/skelet
 import { IonicModule } from '@ionic/angular';
 import { RecipeAllInformationComponent } from './skeleton-loaders/recipe-all-information/recipe-all-information.component';
 import { SkeletonSearchRecipeComponent } from './skeleton-loaders/skeleton-search-recipe/skeleton-search-recipe.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { SkeletonSearchRecipeComponent } from './skeleton-loaders/skeleton-searc
     SkeletonCardsComponent,
     RecipeAllInformationComponent,
     SkeletonSearchRecipeComponent,
+    ClickOutsideDirective,
   ],
   imports: [CommonModule, IonicModule],
   exports: [
@@ -22,6 +24,7 @@ import { SkeletonSearchRecipeComponent } from './skeleton-loaders/skeleton-searc
     SkeletonCardsComponent,
     RecipeAllInformationComponent,
     SkeletonSearchRecipeComponent,
+    ClickOutsideDirective,
   ],
 })
 export class SharedModule {}

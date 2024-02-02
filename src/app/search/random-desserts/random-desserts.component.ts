@@ -30,7 +30,7 @@ export class RandomDessertsComponent implements OnInit, OnDestroy {
   }
 
   getDesserts() {
-    const apiUrl = 'random';
+    const apiUrl = 'recipes/random';
     this.subscription.add(
       this.apiService
         .getApiData(apiUrl, { number: 10, tags: 'dessert' })
