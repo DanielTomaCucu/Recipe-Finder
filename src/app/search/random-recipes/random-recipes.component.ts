@@ -28,7 +28,7 @@ export class RandomRecipesComponent implements OnInit, OnDestroy {
   }
 
   getRandomRecipes() {
-    const endpoint = 'random?number=10';
+    const endpoint = 'recipes/random?number=10';
     this.subscription.add(
       this.apiService.getApiData(endpoint).subscribe(
         (data) => {

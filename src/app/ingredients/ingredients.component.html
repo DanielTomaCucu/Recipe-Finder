@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Ingredients </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Ingredients</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="container-main">
+    <div class="container-input-results" >
+      <div class="input-search">
+        <ion-input
+          [formControl]="searchControl"
+          placeholder="Enter text"
+        ></ion-input>
+      </div>
+      <ng-container
+        *ngIf="autoCompleteResults$ | async as ingredients" class="autocomplete-container"
+      >
+        <div *ngIf="ingredients.length > 0" class="results-list-container" appClickOutside (appClickOutside)="hideAutocompleteResults()">
+          <div *ngFor="let ingredient of ingredients" class="ingredient-item">
+            <div class="ingredient-img-container">
+              <img
+                [src]="
+                  'https://spoonacular.com/cdn/ingredients_100x100/' +
+                  ingredient.image
+                "
+                alt="{{ ingredient.name }}"
+              />
+            </div>
+            <div class="ingredient-checkbox">
+              <p>{{ ingredient.name }}</p>
+              <ion-checkbox slot="end"></ion-checkbox>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noResults></ng-template>
+    </div>
+  </div>
+</ion-content>

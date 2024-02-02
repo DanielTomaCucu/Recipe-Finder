@@ -31,14 +31,14 @@ export class SearchService {
       number: 20,
       offset: this.offset,
     };
-    this.apiService.getApiData('complexSearch', params).subscribe({
+    this.apiService.getApiData('recipes/complexSearch', params).subscribe({
       next: (data: any) => {
-
         if (
           data.offset + data.number <= this.offset ||
           data.totalResults <= this.offset ||
           !data
-        ) { this.allDataLoaded = true;
+        ) {
+          this.allDataLoaded = true;
           console.log(data.totalResults, this.offset, this.allDataLoaded);
           this.loadingSubject.next(false);
           return;
