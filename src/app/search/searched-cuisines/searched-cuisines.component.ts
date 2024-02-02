@@ -11,26 +11,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./searched-cuisines.component.scss'],
 })
 export class SearchedCuisinesComponent implements OnInit, OnDestroy {
-  constructor(private searchService: SearchService, private router: Router) {}
+  constructor(protected searchService: SearchService, private router: Router) {}
   private subs: Subscription = new Subscription();
   recipes: any = [];
-  loading: boolean = false;
+  loading: boolean = true;
   yourThresholdValue = 100;
 
   ngOnInit() {
-    console.log(this.recipes);
-    this.subs.add(
-      this.searchService.loading$.subscribe(
-        (loading) => (this.loading = loading)
-      )
-    );
+
+    this.getAllRecipes();
+  }
+
+  getAllRecipes() {
+ this.subs.add(
+   this.searchService.loading$.subscribe((loadingState) => {
+     console.log(loadingState, this.allDataLoaded)
+     this.loading = loadingState;
+   })
+
+ );
+     console.log(this.recipes, this.loading);
+     console.log(this.loading)
     this.subs.add(
       this.searchService.recipes$.subscribe((data) => {
         this.recipes = data;
-        console.log(this.recipes);
+        console.log(this.recipes, this.loading);
       })
     );
   }
+
   get allDataLoaded() {
     return this.searchService.allDataLoaded;
   }
@@ -52,6 +61,13 @@ export class SearchedCuisinesComponent implements OnInit, OnDestroy {
   }
   redirectToRecipe(id: number) {
     this.router.navigateByUrl(`/recipe-details/${id}`);
+  }
+
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      this.getAllRecipes();
+      event.target.complete();
+    }, 2000);
   }
 
   ngOnDestroy(): void {

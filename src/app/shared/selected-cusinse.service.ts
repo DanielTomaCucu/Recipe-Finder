@@ -12,7 +12,6 @@ export class SelectedCusinseService {
   }
 
   getSelectedCuisines(): string[] {
-    console.log(this.selectedCuisines)
     return this.selectedCuisines;
   }
 

@@ -1,0 +1,26 @@
+.recipes-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 15px;
+  gap: 15px;
+}
+
+ion-card {
+  margin: 0px;
+}
+
+ion-card-content {
+  padding: 15px;
+}
+
+.recipe-details-icon {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.skeleton-img, .skeleton-title, .skeleton-text {
+  border-radius: 4px; /* Adds a slight rounding to skeleton elements for aesthetics */
+}
+
+/* Add any additional styling needed for skeleton elements if necessary */
