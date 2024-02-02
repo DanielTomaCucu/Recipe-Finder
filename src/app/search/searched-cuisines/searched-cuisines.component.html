@@ -8,6 +8,20 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="loading && recipes.length === 0">
+    <app-skeleton-search-recipe></app-skeleton-search-recipe>
+  </div>
+
   <div *ngIf="recipes.length > 0; else noRecipes">
     <div class="recipes-container">
       <ion-card
@@ -30,24 +44,30 @@
         </ion-card-content>
       </ion-card>
     </div>
+
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
       <div
         class="infinite-scroll-content"
-        *ngIf="!allDataLoaded; else allDataLoaded"
+        *ngIf="
+          loading && recipes.length > 0 && !allDataLoaded;
+          else noNoreRecipes
+        "
       >
         <img class="loader-svg" src="../../../assets/icons/loader.svg" />
       </div>
-      <ng-template #allDataLoaded>
-        <div class="noMoreRecipesContainer">
-          <p>No More Recipes</p>
-        </div>
-      </ng-template>
     </ion-infinite-scroll>
+    <ng-template #noNoreRecipes>
+      <div class="noMoreRecipesContainer">
+        <p>No More Recipes</p>
+      </div>
+    </ng-template>
   </div>
 
   <ng-template #noRecipes>
-    <div class="no-recipe-container">
-      <img class="no-recipe" src="../../../assets/icons/no-recipe.png" />
+    <div *ngIf="!loading">
+      <div class="no-recipe-container">
+        <img class="no-recipe" src="../../../assets/icons/no-recipe.png" />
+      </div>
     </div>
   </ng-template>
 </ion-content>

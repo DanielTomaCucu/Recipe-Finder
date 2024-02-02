@@ -33,6 +33,7 @@ export class SearchService {
     };
     this.apiService.getApiData('complexSearch', params).subscribe({
       next: (data: any) => {
+
         if (
           data.offset + data.number <= this.offset ||
           data.totalResults <= this.offset ||
@@ -48,7 +49,9 @@ export class SearchService {
         this.recipeSubject.next(newRecipes);
         this.offset += data.number;
         this.loadingSubject.next(false);
+        console.log(newRecipes, currentRecipes);
       },
+
       error: (err) => {
         console.error(err);
         this.loadingSubject.next(false);
@@ -59,5 +62,6 @@ export class SearchService {
   resetData() {
     this.recipeSubject.next([]);
     this.offset = 0;
+    this.allDataLoaded = false;
   }
 }
