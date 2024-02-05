@@ -1,4 +1,4 @@
-const wineCategories = {
+export const wineCategories={
 
     white_wine: {
       dry_white_wine: [
@@ -109,6 +109,6 @@ const wineCategories = {
     ],
     sherry: ['cream_sherry', 'dry_sherry'],
     vermouth: ['dry_vermouth'],
-  
+
 
 };

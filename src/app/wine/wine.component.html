@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Wine</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container-main">
+    <div class="input-search">
+      <ion-input
+        [clearInput]="true"
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="onSearchChange()"
+        placeholder="Search wines..."
+      ></ion-input>
+    </div>
+
+    <div
+      *ngIf="searchQuery && filteredWines.length"
+      class="results-list-container"
+    >
+      <p *ngFor="let wine of filteredWines" (click)="getWine(wine)">
+        {{ wine | capitalizeFirst }}
+      </p>
+    </div>
+
+    <!-- Display wine pairings -->
+    <div *ngIf="wineResults$ | async as results" class="dish-container">
+      <div
+        *ngFor="let pairing of results.pairings"
+        class="dish"
+        (click)="getDish(pairing)"
+      >
+        <p>{{ pairing }}</p>
+      </div>
+    </div>
+
+    <!-- Display dishes for the selected wine pairing -->
+    <div *ngIf="dish$ | async as dishes">
+      <div class="recipes-container">
+        <ion-card *ngFor="let dish of dishes.results" (click)="redirectToRecipe(dish.id)">
+          <img [src]="dish.image" />
+          <h6>{{ dish.title }}</h6>
+          <ion-card-content>
+            <div>
+              <div class="recipe-details-icon">
+                <img src="../../../assets/icons/cooking-pot-svgrepo-com.svg" />
+                <p>{{ dish.readyInMinutes }} minutes</p>
+              </div>
+              <div class="recipe-details-icon">
+                <img src="../../../assets/icons/bowl-svgrepo-com.svg" />
+                <p>{{ dish.servings }} servings</p>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+
+    <ng-template #noDish>
+      <p>No dish pairings found for the selected wine.</p>
+    </ng-template>
+  </div>
+</ion-content>

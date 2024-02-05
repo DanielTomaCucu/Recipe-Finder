@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AnalyticsPage } from './tab3.page';
+import { WineComponent } from './wine.component';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: AnalyticsPage,
-  }
-];
+const routes: Routes = [{ path: '', component: WineComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AnalyticsPageRoutingModule {}
+export class WineRoutingModule {}

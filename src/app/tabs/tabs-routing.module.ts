@@ -20,10 +20,10 @@ const routes: Routes = [
           import('../search/search.module').then((m) => m.SearchPageModule),
       },
       {
-        path: 'analytics',
+        path: 'wine',
         loadChildren: () =>
-          import('../analytics/analytics.module').then(
-            (m) => m.AnalyticsPageModule
+          import('../wine/wine.module').then(
+            (m) => m.WineModule
           ),
       },
       {
@@ -48,7 +48,7 @@ const routes: Routes = [
         '../shared/recipe-all-information/recipe-all-information.module'
       ).then((m) => m.RecipeAllInformationModule),
   },
- 
+
 
   {
     path: '',
