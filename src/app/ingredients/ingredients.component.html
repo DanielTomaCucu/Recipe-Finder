@@ -11,18 +11,28 @@
     </ion-toolbar>
   </ion-header>
   <div class="container-main">
-    <div class="container-input-results" >
+    <div class="container-input-results">
       <div class="input-search">
-        <ion-input
+        <ion-input  [clearInput]="true"
           [formControl]="searchControl"
           placeholder="Enter text"
         ></ion-input>
       </div>
       <ng-container
-        *ngIf="autoCompleteResults$ | async as ingredients" class="autocomplete-container"
+        *ngIf="autoCompleteResults$ | async as ingredients"
+        class="autocomplete-container"
       >
-        <div *ngIf="ingredients.length > 0" class="results-list-container" appClickOutside (appClickOutside)="hideAutocompleteResults()">
-          <div *ngFor="let ingredient of ingredients" class="ingredient-item">
+        <div
+          *ngIf="ingredients.length > 0"
+          class="results-list-container"
+          appClickOutside
+          (appClickOutside)="hideAutocompleteResults()"
+        >
+          <div
+            *ngFor="let ingredient of ingredients"
+            class="ingredient-item"
+            (click)="toggleCheckbox(ingredient)"
+          >
             <div class="ingredient-img-container">
               <img
                 [src]="
@@ -34,12 +44,19 @@
             </div>
             <div class="ingredient-checkbox">
               <p>{{ ingredient.name }}</p>
-              <ion-checkbox slot="end"></ion-checkbox>
+              <ion-checkbox
+                [(ngModel)]="ingredient.checked"
+                slot="end"
+              ></ion-checkbox>
             </div>
           </div>
         </div>
       </ng-container>
       <ng-template #noResults></ng-template>
+    </div>
+    <div class="ingredients-container" >
+
+      <app-ingredients-list ></app-ingredients-list>
     </div>
   </div>
 </ion-content>

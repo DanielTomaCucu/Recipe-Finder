@@ -1,0 +1,33 @@
+<div
+  class="list-items-container"
+  *ngIf="
+    checkedIngredients && checkedIngredients.length > 0;
+    else noIngredinets
+  "
+>
+  <div class="header-list">
+    <h6>
+      Selected Ingredients<ion-chip color="primary">{{ checkedIngredients.length }}</ion-chip>
+    </h6>
+    <img
+      class="delete-list"
+      src="../../assets/icons/delete-list.svg"
+      (click)="removeAllIngredinets()"
+    />
+  </div>
+  <div
+    *ngFor="let ingredient of checkedIngredients"
+    class="checked-ingredient-item"
+  >
+    <p>{{ ingredient.name }}</p>
+    <div class="remove-from-list" (click)="removeOneIngredient(ingredient)">
+      <img src="../../../assets/icons/remove-from-list.svg" />
+    </div>
+  </div>
+</div>
+<ng-template #noIngredinets>
+  <div class="no-results-container">
+    <h6>No Ingredients selected</h6>
+    <img src="../../../assets/icons/no-results.svg" />
+  </div>
+</ng-template>

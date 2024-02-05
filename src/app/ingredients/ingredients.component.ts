@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { IngredientsService } from './ingredients.service';
+import { Ingredient } from '../interfaces/ingredients';
 
 @Component({
   selector: 'app-ingredients',
@@ -43,5 +44,10 @@ export class IngredientsComponent implements OnInit {
   }
   hideAutocompleteResults() {
     this.autoCompleteResults$ = null; // Adjust as needed to hide or clear results
+  }
+
+  toggleCheckbox(ingredient: Ingredient) {
+    ingredient.checked = !ingredient.checked;
+    this.ingredientsService.toggleIngredient(ingredient);
   }
 }
