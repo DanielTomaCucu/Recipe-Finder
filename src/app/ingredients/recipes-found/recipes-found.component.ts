@@ -9,16 +9,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./recipes-found.component.scss'],
 })
 export class RecipesFoundComponent implements OnInit {
-  recipes$: Observable<any> = new Observable<any>();
+  recipes$: Observable<any> = new Observable<[]>();
+  isLoading = true;
   constructor(
-    private recipesFounfService: RecipesFoundService,
+    private recipesFoundService: RecipesFoundService,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.recipes$ = this.recipesFounfService.getRecipesByIngredients();
+    this.recipes$ = this.recipesFoundService.getRecipesByIngredients();
+    this.recipes$.subscribe({
+      next: (data) => {
+        console.log(data);
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
   }
   redirectToRecipe(id: string) {
     this.router.navigateByUrl('recipe-details/' + id);
   }
+
 }

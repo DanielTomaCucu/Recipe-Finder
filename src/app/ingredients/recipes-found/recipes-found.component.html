@@ -1,26 +1,33 @@
 <div class="container-recipes">
-  <div *ngFor="let recipe of recipes$ | async" class="found-recipes-container" (click)="redirectToRecipe(recipe.id)">
-    <img [src]="recipe.image" />
-    <div class="recipe-info">
-      <p class="title">{{ recipe.title }}</p>
-      <div>
-        <p>
-          Ingredients used
-          <span class="used"> {{ recipe.usedIngredientCount }}</span>
-        </p>
-        <p>
-          Extra ingredients
-          <span class="extra"> {{ recipe.missedIngredientCount }}</span>
-        </p>
-        <p>
-          Ingredients unused
-          <span class="unused"> {{ recipe.unusedIngredients.length }}</span>
-        </p>
+  <app-skeleton-recipes-found
+    *ngIf="isLoading; else recipes"
+  ></app-skeleton-recipes-found>
+
+  <ng-template #recipes>
+    <div
+      *ngFor="let recipe of recipes$ | async"
+      class="found-recipes-container"
+      (click)="redirectToRecipe(recipe.id)"
+    >
+      <img [src]="recipe.image" />
+      <div class="recipe-info">
+        <p class="title">{{ recipe.title }}</p>
+        <div>
+          <p>
+            Ingredients used
+            <span class="used"> {{ recipe.usedIngredientCount }}</span>
+          </p>
+          <p>
+            Extra ingredients
+            <span class="extra"> {{ recipe.missedIngredientCount }}</span>
+          </p>
+          <p>
+            Ingredients unused
+            <span class="unused"> {{ recipe.unusedIngredients.length }}</span>
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="more-button">
-  <h6>View more</h6>
+   
+  </ng-template>
 </div>

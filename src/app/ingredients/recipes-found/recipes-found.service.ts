@@ -26,7 +26,7 @@ export class RecipesFoundService {
     const url = 'recipes/findByIngredients';
     const params = {
       ingredients: this.getingFromLocalStorage().join(','),
-      number: 5,
+      number: 50,
       ranking:2
     };
 
