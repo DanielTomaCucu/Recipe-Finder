@@ -10,7 +10,9 @@ const routes: Routes = [
       {
         path: 'ingredients',
         loadChildren: () =>
-          import('../ingredients/ingredients.module').then((m) => m.IngredientsModule),
+          import('../ingredients/ingredients.module').then(
+            (m) => m.IngredientsModule
+          ),
       },
       {
         path: 'search',
@@ -46,6 +48,7 @@ const routes: Routes = [
         '../shared/recipe-all-information/recipe-all-information.module'
       ).then((m) => m.RecipeAllInformationModule),
   },
+ 
 
   {
     path: '',

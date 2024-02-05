@@ -1,0 +1,19 @@
+<ion-card *ngFor="let i of [].constructor(4)">
+  <ion-skeleton-text
+    animated
+    style="height: 150px; height: 150px; margin: 0px; width: 80%"
+  ></ion-skeleton-text>
+  <div>
+    <ion-card-header>
+      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-skeleton-text
+        animated
+        style="width: 80%; margin-bottom: 10px"
+      ></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+    </ion-card-content>
+  </div>
+</ion-card>
