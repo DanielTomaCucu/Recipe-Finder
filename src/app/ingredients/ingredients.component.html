@@ -13,7 +13,8 @@
   <div class="container-main">
     <div class="container-input-results">
       <div class="input-search">
-        <ion-input  [clearInput]="true"
+        <ion-input
+          [clearInput]="true"
           [formControl]="searchControl"
           placeholder="Enter text"
         ></ion-input>
@@ -54,9 +55,21 @@
       </ng-container>
       <ng-template #noResults></ng-template>
     </div>
-    <div class="ingredients-container" >
-
-      <app-ingredients-list ></app-ingredients-list>
+    <div class="ingredients-container">
+      <ion-segment [(ngModel)]="segmentValue">
+        <ion-segment-button value="ingredients">
+          <ion-label>Selected Ingredients</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="recipes">
+          <ion-label>Recipes Found</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <div *ngIf="segmentValue == 'ingredients'">
+        <app-ingredients-list></app-ingredients-list>
+      </div>
+      <div *ngIf="segmentValue == 'recipes'">
+        <app-recipes-found></app-recipes-found>
+      </div>
     </div>
   </div>
 </ion-content>
