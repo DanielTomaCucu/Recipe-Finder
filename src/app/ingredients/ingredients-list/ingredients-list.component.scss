@@ -1,0 +1,47 @@
+.checked-ingredient-item {
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 0px 10px;
+}
+.remove-from-list {
+  width: 25px;
+  height: 25px;
+}
+.list-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+h6 {
+  font-weight: 500;
+  font-size: large;
+}
+.header-list {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding-right: 10px;
+  img {
+    width: 25px;
+    height: 25px;
+  }
+}
+.no-results-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  gap: 55px;
+  img {
+    width: 50%;
+  }
+}
