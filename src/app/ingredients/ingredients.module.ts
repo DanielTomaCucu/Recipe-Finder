@@ -6,10 +6,11 @@ import { IonicModule } from '@ionic/angular';
 import { IngredientsComponent } from './ingredients.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IngredientsListComponent } from './ingredients-list/ingredients-list.component';
+import { RecipesFoundComponent } from './recipes-found/recipes-found.component';
 
 
 @NgModule({
-  declarations: [IngredientsComponent, IngredientsListComponent],
+  declarations: [IngredientsComponent, IngredientsListComponent, RecipesFoundComponent],
   imports: [
     CommonModule,
     IngredientsRoutingModule,

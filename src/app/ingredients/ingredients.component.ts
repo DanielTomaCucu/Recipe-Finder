@@ -13,6 +13,7 @@ import { Ingredient } from '../interfaces/ingredients';
 export class IngredientsComponent implements OnInit {
   autoCompleteResults$: Observable<any> | null = null;
   searchControl = new FormControl('');
+  segmentValue = 'ingredients';
 
   constructor(
     private ingredientsService: IngredientsService,
@@ -26,7 +27,7 @@ export class IngredientsComponent implements OnInit {
         if (searchQuery && searchQuery.length >= 3) {
           this.search(searchQuery);
         } else {
-          this.autoCompleteResults$ = null; // Optionally hide results if query is too short
+          this.autoCompleteResults$ = null;
         }
       });
   }
@@ -39,11 +40,11 @@ export class IngredientsComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     if (!this.elRef.nativeElement.contains(event.target)) {
-      this.autoCompleteResults$ = null; // Hide the autocomplete results
+      this.autoCompleteResults$ = null; 
     }
   }
   hideAutocompleteResults() {
-    this.autoCompleteResults$ = null; // Adjust as needed to hide or clear results
+    this.autoCompleteResults$ = null;
   }
 
   toggleCheckbox(ingredient: Ingredient) {
