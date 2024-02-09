@@ -5,6 +5,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  
   <div class="container-main">
     <div class="input-search">
       <ion-input
@@ -36,7 +46,6 @@
       </div>
     </div>
 
-    <!-- Display dishes for the selected wine pairing -->
     <div *ngIf="dish$ | async as dishes">
       <div class="recipes-container">
         <ion-card *ngFor="let dish of dishes.results" (click)="redirectToRecipe(dish.id)">
