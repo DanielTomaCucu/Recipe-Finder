@@ -55,7 +55,7 @@ export class WineComponent implements OnInit {
       }),
       catchError((error) => {
         console.error('Failed to fetch wine pairings:', error);
-         this.searchQuery = '';
+        this.searchQuery = '';
         return [];
       })
     );
@@ -65,5 +65,11 @@ export class WineComponent implements OnInit {
   }
   redirectToRecipe(id: string) {
     this.router.navigateByUrl('recipe-details/' + id);
+  }
+  handleRefresh(event: any) {
+    setTimeout(() => {
+     
+      event.target.complete();
+    }, 2000);
   }
 }
