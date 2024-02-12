@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   constructor() {}
+  showContent = true;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.showContent = window.innerWidth <= 767;
+  }
 }

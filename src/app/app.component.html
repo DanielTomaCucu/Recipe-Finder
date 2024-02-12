@@ -1,3 +1,10 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ng-container *ngIf="showContent; else showMessage">
+    <ion-router-outlet></ion-router-outlet>
+  </ng-container>
+  <ng-template #showMessage>
+    <div class="message-container">
+      <p>This content is only available on mobile devices. Please use a mobile device to view this content.</p>
+    </div>
+  </ng-template>
 </ion-app>
