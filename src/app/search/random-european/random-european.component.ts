@@ -26,7 +26,7 @@ export class RandomEuropeanComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-   // this.getEuropenFood();
+   this.getEuropenFood();
   }
   getEuropenFood() {
     const apiUrl = 'recipes/random/';
