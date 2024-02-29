@@ -21,4 +21,4 @@ The project can be found here: [https://recipe-finder-green.vercel.app/]
 - **Filters**: Filter recipes by preferences such as african, indian, korean etc.
 - **Search for Ingredients**: Easily find ingredients and suggested recipes.
 - **Wine Exploration**: Discover and learn about different types of wine, their tasting notes, and ideal food pairings.
-- **Responsive Design**: Enjoy a seamless experience across various devices and screen sizes, thanks to Tailwind CSS.
+- **Responsive Design**: Enjoy a seamless experience across various devices and screen sizes.
