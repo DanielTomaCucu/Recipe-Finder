@@ -26,7 +26,7 @@ export class RandomDessertsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    //this.getDesserts();
+    this.getDesserts();
   }
 
   getDesserts() {
